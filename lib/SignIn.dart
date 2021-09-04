@@ -6,7 +6,7 @@ import 'package:http/http.dart'as http;
 import 'dart:convert';
 import 'package:kase_app/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shared_preferences_windows/shared_preferences_windows.dart';
+
 
 TextEditingController _phoneNumber = TextEditingController();
 TextEditingController _passWord = TextEditingController();
@@ -27,6 +27,8 @@ class _SignInState extends State<SignIn> {
       Map data = {
         'phone': phoneNumber,
         'password': password,
+        'fcm_token':"test",
+        'device_type':"Android",
 
       };
       var url = Uri.parse('https://apidev.chabhuoy.online/api/login');

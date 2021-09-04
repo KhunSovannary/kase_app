@@ -64,7 +64,7 @@ class _RegisterState extends State<Register> {
                       color: Colors.grey
                   ),)),
               SizedBox(height: 10),
-                TextFormField(
+               /* TextFormField(
                   controller: _conpassword,
                   decoration: InputDecoration(
                   border:OutlineInputBorder(
@@ -77,7 +77,7 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 10),*/
               RaisedButton(
                 child:Text("Register"),
 
@@ -92,18 +92,19 @@ createData () async {
   var fullname= _fullName.text;
   var phoneNumber= _phoneNumber.text;
   var password = _password.text;
-  var conpassword = _conpassword.text;
+  //var conpassword = _conpassword.text;
   var data = json.encode(
-        {"fullname":_fullName,
-         "phonenumber": _phoneNumber,
-         "password": _password,
-         "conpassword": _conpassword,}
+        {"full_name":fullname,
+         "phone": phoneNumber,
+         "password": password
+        }
          );
   var header={
     "Content-Type": "application/json",
     "Accept": "application/json"
   };
-  var response = await http.post("https://apidev.chabhuoy.online/api/register",headers: header,body: data);
+  var url = Uri.parse("https://apidev.chabhuoy.online/api/register");
+  var response = await http.post(url,headers: header,body: data);
   if(response.statusCode==200)
     print("Successful");
   else

@@ -93,10 +93,12 @@ createData () async {
   var phoneNumber= _phoneNumber.text;
   var password = _password.text;
   //var conpassword = _conpassword.text;
-  var data = json.encode(
-        {"full_name":fullname,
-         "phone": phoneNumber,
-         "password": password
+  var data = jsonEncode(
+        { "phone": phoneNumber,
+          "full_name":fullname,
+          "password": password,
+          'fcm_token':"test",
+          'device_type':"Android",
         }
          );
   var header={

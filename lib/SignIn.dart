@@ -32,14 +32,16 @@ class _SignInState extends State<SignIn> {
     var jsonData;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await http.post(url,body: data);
+    print(jsonDecode(response.body));
     if(response.statusCode==200){
-      jsonData= json.decode(response.body);
-      setState(() {
-         sharedPreferences.setString("token",jsonData['token']);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (BuildContext context)=>HomePage()),
-                (Route<dynamic> route) => false);
-      });
+      print(response.body);
+      jsonData= jsonDecode(response.body);
+      setState(() {});
+
+      sharedPreferences.setString("token",jsonData["token"]);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context)=>HomePage()),
+              (Route<dynamic> route) => false);
     }
     else
       print(response.body);
@@ -95,6 +97,7 @@ class _SignInState extends State<SignIn> {
                 color: Colors.green,
                 textColor: Colors.white, onPressed: () {
                   signIn(_phoneNumber.text,_passWord.text);
+
               },
               ),
               SizedBox(height: 10),

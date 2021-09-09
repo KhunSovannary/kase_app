@@ -31,6 +31,7 @@ dependencies:
   carousel_pro: ^1.0.0
   barcode_scan: ^2.0.1
   shared_preferences: ^2.0.7
+  firebase_messaging: ^10.0.6
 
 
 

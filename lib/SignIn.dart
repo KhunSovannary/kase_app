@@ -20,33 +20,34 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  Future<Map<String, dynamic>> signIn (String phoneNumber, String password) async{
+    final Map<String,dynamic> data = {
+      'phone': phoneNumber,
+      'password': password,
+      'fcm_token':"test",
+      'device_type':"Android",
 
-  @override
- Widget build(BuildContext context) {
-    signIn (String phoneNumber, String password) async{
-      Map data = {
-        'phone': phoneNumber,
-        'password': password,
-        'fcm_token':"test",
-        'device_type':"Android",
-
-      };
-      var url = Uri.parse('https://apidev.chabhuoy.online/api/login');
-      var jsonData = null;
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      var response = await http.post(url,body: data);
-      if(response.statusCode==200){
-        jsonData= json.decode(response.body);
-        setState(() {
-          sharedPreferences.setString("token",jsonData['token']);
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(builder: (BuildContext context)=>HomePage()),
-                  (Route<dynamic> route) => false);
-        });
-      }
-      else
-        print(response.body);
+    };
+    var url = Uri.parse('https://apidev.chabhuoy.online/api/login');
+    var jsonData;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var response = await http.post(url,body: data);
+    if(response.statusCode==200){
+      jsonData= json.decode(response.body);
+      setState(() {
+         sharedPreferences.setString("token",jsonData['token']);
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (BuildContext context)=>HomePage()),
+                (Route<dynamic> route) => false);
+      });
     }
+    else
+      print(response.body);
+  }
+  @override
+
+ Widget build(BuildContext context) {
+
     return Scaffold(
         body: Container(
           padding: EdgeInsets.all(20),

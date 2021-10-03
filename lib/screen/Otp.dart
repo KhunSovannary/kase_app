@@ -14,46 +14,69 @@ class _OTPState extends State<OTP> {
           title: Center(
             child: Text(
               "OTP Verification",
-              style: TextStyle(color: Colors.green),
+              style: TextStyle(color: Colors.green[500]),
             ),
           ),
           elevation: 0,
           backgroundColor: Colors.white,
         ),
         body: SingleChildScrollView(
+            
             child: Container(
-                padding: const EdgeInsets.all(30),
-                child: Column(
-              
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                                Text(
-                                  "Enter Your Verification Code",
-                                  style: TextStyle(color: Colors.green, fontSize: 25),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      pinBox(),
-                                      pinBox(),
-                                      pinBox(),
-                                      pinBox(),
-                                    
-                                    ],
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0,vertical: 100.0),
+                  alignment: Alignment.center,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                                  Text(
+                                    "Enter Your Verification Code",
+                                    style: TextStyle(color: Colors.green[400], fontSize: 20),
                                   ),
-                                )
-                              ],
-        ))));
-  }
-}
+                                  SizedBox(height: 10),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        pinBox(),
+                                        pinBox(),
+                                        pinBox(),
+                                        pinBox(),
+                                      
+                                      ],
+                                    ),),
+                                  Container(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                                RaisedButton(
+                                                  child:Text("Resend"),
+                                                  color: Colors.red,
+                                                  textColor: Colors.white, onPressed: () {
+                                                  },
+                                                ),
+                                                RaisedButton(
+                                                  child:Text("Confirm"),
+                                                  color: Colors.green,
+                                                  textColor: Colors.white, onPressed: () {
+                                                  },
+                                                ),
+                                      
+                                      ],
+                                    ),),
+                                  
+                                              ],
+                      )),
+                          ));
+                }
+              }
 
 Widget pinBox() {
   return SizedBox(
-    width: 40,
+    width: 50,
     child: TextFormField(
       obscureText: true,
       decoration: InputDecoration(

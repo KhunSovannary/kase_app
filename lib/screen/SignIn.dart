@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kase_app/Register.dart';
+import 'package:kase_app/screen/Register.dart';
 import 'package:http/http.dart'as http;
 import 'dart:convert';
 import 'package:kase_app/main.dart';

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:kase_app/register_repository.dart';
 import 'package:kase_app/otp_code_repository.dart';
 import 'package:kase_app/register_repository.dart';
+import 'package:kase_app/screen/Otp.dart';
 // ignore: must_be_immutable
 TextEditingController _fullName = TextEditingController();
 TextEditingController _phoneNumber= TextEditingController();
@@ -39,7 +40,7 @@ class _RegisterState extends State<Register> {
               Text('Welcome! to\n Kase App',style:TextStyle(color:Colors.green, fontWeight: FontWeight.bold,fontSize: 50)),
               Text('Sign Up here!'),
               SizedBox(height:10),
-              TextFormField(
+              /*TextFormField(
                 controller: _fullName,
                 decoration: InputDecoration(
                   border:OutlineInputBorder(),
@@ -62,7 +63,7 @@ class _RegisterState extends State<Register> {
                   ),
 
                 ),
-              ),
+              ),*/
               SizedBox(height: 10),
               TextFormField(
                   controller: _password,
@@ -96,8 +97,10 @@ class _RegisterState extends State<Register> {
                 color: Colors.green,
                 textColor: Colors.white, onPressed: () {
                   if ( _conpassword.text == _password.text){
-                    otpCodeRepository.getOtpCode(phone:_phoneNumber.text).then((response)=>{
-                      if(!response.status) _showMyDialog(context, message: response.msg)
+                    Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OTP()));
+                    //otpCodeRepository.getOtpCode(phone:_phoneNumber.text).then((response)=>{
+                     // if(!response.status) _showMyDialog(context, message: response.msg)
                     }
                         //  if(!response.status){
                         //   Navigator.pop(context),
@@ -109,8 +112,8 @@ class _RegisterState extends State<Register> {
                        /* else
                           // registerRepository.register(user( "2234",response.data))*/
 
-                     );
-                  }
+                     
+                  
                   else
                     print("not match");
                    }

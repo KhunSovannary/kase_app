@@ -2,9 +2,9 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:kase_app/SignIn.dart';
-import 'package:kase_app/Register.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kase_app/screen/SignIn.dart';
+import 'package:kase_app/screen/Register.dart';
+
 void main() {
   runApp(MyApp());
 }

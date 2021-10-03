@@ -14,7 +14,10 @@ class _OTPState extends State<OTP> {
           title: Center(
             child: Text(
               "OTP Verification",
-              style: TextStyle(color: Colors.green[500]),
+              style: TextStyle(
+                color: Colors.green[500],
+                fontSize: 29,
+                fontWeight: FontWeight.bold),
             ),
           ),
           elevation: 0,
@@ -30,6 +33,12 @@ class _OTPState extends State<OTP> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                                  Icon(
+                                    Icons.lock_rounded,
+                                    color: Colors.green,
+                                    size: 80,
+                                  ),
+                                  SizedBox(height: 10),
                                   Text(
                                     "Enter Your Verification Code",
                                     style: TextStyle(color: Colors.green[400], fontSize: 20),
@@ -53,13 +62,13 @@ class _OTPState extends State<OTP> {
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                                 RaisedButton(
-                                                  child:Text("Resend"),
+                                                  child:Text("Resend",style: TextStyle(fontSize: 17),),
                                                   color: Colors.red,
                                                   textColor: Colors.white, onPressed: () {
                                                   },
                                                 ),
                                                 RaisedButton(
-                                                  child:Text("Confirm"),
+                                                  child:Text("Confirm",style: TextStyle(fontSize: 17),),
                                                   color: Colors.green,
                                                   textColor: Colors.white, onPressed: () {
                                                   },
@@ -67,6 +76,7 @@ class _OTPState extends State<OTP> {
                                       
                                       ],
                                     ),),
+                                  
                                   
                                               ],
                       )),

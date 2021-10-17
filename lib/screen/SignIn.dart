@@ -28,7 +28,7 @@ class _SignInState extends State<SignIn> {
       'device_type':"Android",
 
     };
-    var url = Uri.parse('https://apidev.chabhuoy.online/api/login');
+    var url = Uri.parse('https://kasefarm1.kasegro.com/api/login');
     var jsonData;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var response = await http.post(url,body: data);

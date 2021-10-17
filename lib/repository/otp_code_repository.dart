@@ -1,12 +1,13 @@
-import 'package:kase_app/response model.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
+import 'package:kase_app/model/response%20model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class OtpCodeRepository {
 
-  Future<ResponseModel> getOtpCode({String phone}) async {
+  Future<ResponseModel> getOtpCode( {String phone}) async {
     try {
       final response = await http.post(
-        Uri.parse("https://apidev.chabhuoy.online/api/get-otp-code"),
+        Uri.parse("https://kasefarm1.kasegro.com/api/get-otp-code"),
         headers: <String,String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

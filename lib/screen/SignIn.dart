@@ -76,6 +76,7 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 10),
               TextFormField(
+                obscureText: true,
                 controller: _passWord,
                 decoration: InputDecoration(
                   border:OutlineInputBorder(

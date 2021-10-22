@@ -96,6 +96,8 @@ class _OTPState extends State<OTP> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 10),
+                  Text("A code has been sent to "),
+                  Text("${hidePhoneNumber(widget.phoneNumber)}"),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: Row(
@@ -108,6 +110,7 @@ class _OTPState extends State<OTP> {
                       ],
                     ),
                   ),
+                  buildTimer(),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: Row(
@@ -151,7 +154,6 @@ class _OTPState extends State<OTP> {
                               register.register(data).then((response) => {
                                     if (!response.status)
                                       {
-                                        
                                         print(response.status),
                                         print("error"),
                                       }
@@ -217,3 +219,41 @@ Map<String, dynamic> user(String _fullname, String _password, String _phone,
   };
   return data;
 }
+
+
+
+//Hide phone number
+String hidePhoneNumber(String phone) {
+
+String newNumber=phone;
+//function for replacing string wtih *
+String replaceCharAt(String oldString, int index, String newChar) {
+       return oldString.substring(0, index) + newChar + oldString.substring(index + 1);
+     }
+
+
+   for(int i=0; i<phone.length-4;i++){
+         newNumber = replaceCharAt(newNumber, i, "*") ; 
+
+    }
+
+  return newNumber;}
+
+   Row buildTimer() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("This code will expired in "),
+        TweenAnimationBuilder(
+          tween: Tween(begin: 30.0, end: 0.0),
+          duration: Duration(seconds: 30),
+          builder: (_, dynamic value, child) => Text(
+            "00:${value.toInt()}",
+            style: TextStyle(color: Colors.green),
+          ),
+        ),
+      ],
+    );
+  }
+
+

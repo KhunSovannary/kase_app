@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kase_app/main.dart';
-import "package:http/http.dart" as http;
-import 'dart:convert';
-import 'package:flutter/services.dart';
+//import 'package:kase_app/main.dart';
+//import "package:http/http.dart" as http;
+//import 'dart:convert';
+//import 'package:flutter/services.dart';
 import 'package:kase_app/repository/register_repository.dart';
 import 'package:kase_app/repository/otp_code_repository.dart';
 import 'package:kase_app/screen/Otp.dart';
@@ -76,6 +76,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10),
                     TextFormField(
                         controller: _password,
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           prefixIcon: Icon(
@@ -89,6 +90,7 @@ class _RegisterState extends State<Register> {
                     SizedBox(height: 10),
                     TextFormField(
                       controller: _conpassword,
+                      obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(

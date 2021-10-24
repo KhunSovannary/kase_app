@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:kase_app/screen/Register.dart';
 import 'package:http/http.dart'as http;
 import 'dart:convert';
-import 'package:kase_app/main.dart';
+import 'package:kase_app/screen/Home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

@@ -2,8 +2,10 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:kase_app/model/profile_model.dart';
 import 'package:kase_app/screen/SignIn.dart';
 import 'package:kase_app/screen/Register.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -24,11 +26,7 @@ class _HomePageState extends State<HomePage> {
         child:ListView(
           padding: EdgeInsets.zero,
           children:<Widget>[
-            UserAccountsDrawerHeader(
-                accountName: Text("Unknown"),
-                accountEmail: Text("Not Found"),
-                decoration: BoxDecoration(color: Colors.green),
-                )
+           profileDrawer(),
           ]
         )
       ),

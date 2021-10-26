@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:kase_app/repository/register_repository.dart';
 import 'package:kase_app/repository/otp_code_repository.dart';
 import 'package:kase_app/screen/Otp.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 // ignore: must_be_immutable
 TextEditingController _fullName = TextEditingController();
@@ -106,11 +107,13 @@ class _RegisterState extends State<Register> {
                         child: Text("Register"),
                         color: Colors.green,
                         textColor: Colors.white,
-                        onPressed: () {
+                        onPressed: () async {
                           if (_conpassword.text == _password.text) {
                             /*Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => OTP()));*/
-
+                            final signCode =
+                                await SmsAutoFill().getAppSignature;
+                            print(signCode);
                             otpCodeRepository
                                 .getOtpCode(phone: _phoneNumber.text)
                                 .then((response) => {
@@ -123,20 +126,24 @@ class _RegisterState extends State<Register> {
                           builder: (context) => OTP()))
                     }}*/
 
-                                         // print(response.data),
+                                          // print(response.data),
                                           //print(response.status),
                                         }
                                       else
                                         {
                                           print(response.data),
-                                          
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
                                                   builder: (context) => OTP(
-                                                    phoneNumber: _phoneNumber.text,
-                                                    fullName: _fullName.text,
-                                                    password: _password.text,
-                                                    requestId: response.data,))),
+                                                        phoneNumber:
+                                                            _phoneNumber.text,
+                                                        fullName:
+                                                            _fullName.text,
+                                                        password:
+                                                            _password.text,
+                                                        requestId:
+                                                            response.data,
+                                                      ))),
                                         }
                                     });
                           } else
@@ -148,7 +155,6 @@ class _RegisterState extends State<Register> {
             )));
   }
 }
-
 
 Future<void> _showMyDialog(BuildContext context, {String message}) async {
   return showDialog<void>(

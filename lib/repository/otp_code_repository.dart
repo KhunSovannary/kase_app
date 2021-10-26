@@ -1,5 +1,5 @@
 import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:kase_app/model/response%20model.dart';
+import 'package:kase_app/model/response_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 class OtpCodeRepository {

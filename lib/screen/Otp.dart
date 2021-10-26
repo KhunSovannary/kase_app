@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:kase_app/repository/otp_code_repository.dart';
 import 'package:kase_app/repository/register_repository.dart';
 import 'package:kase_app/screen/SignIn.dart';
+import 'package:otp_autofill/otp_autofill.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 OtpCodeRepository Otp_Code = new OtpCodeRepository();
 
-TextEditingController pin1 = new TextEditingController();
+/*TextEditingController pin1 = new TextEditingController();
 TextEditingController pin2 = new TextEditingController();
 TextEditingController pin3 = new TextEditingController();
 TextEditingController pin4 = new TextEditingController();
@@ -13,7 +15,7 @@ TextEditingController pin4 = new TextEditingController();
 FocusNode pin1Focus;
 FocusNode pin2Focus;
 FocusNode pin3Focus;
-FocusNode pin4Focus;
+FocusNode pin4Focus;*/
 
 class OTP extends StatefulWidget {
   OTP(
@@ -28,22 +30,28 @@ class OTP extends StatefulWidget {
 }
 
 class _OTPState extends State<OTP> {
+  String code;
   RegisterRepository register = new RegisterRepository();
+  OTPTextEditController controller;
+  final scaffoldKey = GlobalKey();
+
   @override
   void initState() {
     // TODO: implement initState
-    super.initState();
-    pin1Focus = FocusNode();
+
+    _listenOtp();
+    /*pin1Focus = FocusNode();
     pin2Focus = FocusNode();
     pin3Focus = FocusNode();
-    pin4Focus = FocusNode();
+    pin4Focus = FocusNode();*/
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
+    SmsAutoFill().unregisterListener();
     super.dispose();
-    pin1Focus.dispose();
+    /*  pin1Focus.dispose();
     pin2Focus.dispose();
     pin3Focus.dispose();
     pin4Focus.dispose();
@@ -52,6 +60,7 @@ class _OTPState extends State<OTP> {
     pin2.dispose();
     pin3.dispose();
     pin4.dispose();
+  }*/
   }
 
   @override
@@ -99,8 +108,15 @@ class _OTPState extends State<OTP> {
                   Text("A code has been sent to "),
                   Text("${hidePhoneNumber(widget.phoneNumber)}"),
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
+                      padding: const EdgeInsets.all(10),
+                      child: PinFieldAutoFill(
+                          codeLength: 4,
+                          onCodeChanged: (val) {
+                            print(val);
+                            code = val;
+                          })
+
+                      /*Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         pinBox(pin1, pin1Focus, pin2Focus),
@@ -108,8 +124,8 @@ class _OTPState extends State<OTP> {
                         pinBox(pin3, pin3Focus, pin4Focus),
                         pinBox(pin4, pin4Focus, pin4Focus),
                       ],
-                    ),
-                  ),
+                    ),*/
+                      ),
                   buildTimer(),
                   Container(
                     padding: const EdgeInsets.all(10),
@@ -141,8 +157,6 @@ class _OTPState extends State<OTP> {
                           color: Colors.green,
                           textColor: Colors.white,
                           onPressed: () {
-                            String code =
-                                pin1.text + pin2.text + pin3.text + pin4.text;
                             if (code != null) {
                               Map<String, dynamic> data = user(
                                   widget.fullName,
@@ -178,7 +192,11 @@ class _OTPState extends State<OTP> {
   }
 }
 
-Widget pinBox(
+void _listenOtp() async {
+  await SmsAutoFill().listenForCode;
+}
+
+/*Widget pinBox(
     TextEditingController pin, FocusNode pinFocus, FocusNode pin2Focus) {
   return SizedBox(
     width: 50,
@@ -206,7 +224,7 @@ Widget pinBox(
       ),
     ),
   );
-}
+}*/
 
 Map<String, dynamic> user(String _fullname, String _password, String _phone,
     String vCode, String vId) {
@@ -220,40 +238,36 @@ Map<String, dynamic> user(String _fullname, String _password, String _phone,
   return data;
 }
 
-
-
 //Hide phone number
 String hidePhoneNumber(String phone) {
-
-String newNumber=phone;
+  String newNumber = phone;
 //function for replacing string wtih *
-String replaceCharAt(String oldString, int index, String newChar) {
-       return oldString.substring(0, index) + newChar + oldString.substring(index + 1);
-     }
-
-
-   for(int i=0; i<phone.length-4;i++){
-         newNumber = replaceCharAt(newNumber, i, "*") ; 
-
-    }
-
-  return newNumber;}
-
-   Row buildTimer() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text("This code will expired in "),
-        TweenAnimationBuilder(
-          tween: Tween(begin: 30.0, end: 0.0),
-          duration: Duration(seconds: 30),
-          builder: (_, dynamic value, child) => Text(
-            "00:${value.toInt()}",
-            style: TextStyle(color: Colors.green),
-          ),
-        ),
-      ],
-    );
+  String replaceCharAt(String oldString, int index, String newChar) {
+    return oldString.substring(0, index) +
+        newChar +
+        oldString.substring(index + 1);
   }
 
+  for (int i = 0; i < phone.length - 4; i++) {
+    newNumber = replaceCharAt(newNumber, i, "*");
+  }
 
+  return newNumber;
+}
+
+Row buildTimer() {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text("This code will expired in "),
+      TweenAnimationBuilder(
+        tween: Tween(begin: 30.0, end: 0.0),
+        duration: Duration(seconds: 30),
+        builder: (_, dynamic value, child) => Text(
+          "00:${value.toInt()}",
+          style: TextStyle(color: Colors.green),
+        ),
+      ),
+    ],
+  );
+}
